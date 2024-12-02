@@ -1,6 +1,16 @@
 import torch.nn as nn
 import json
-from mnist_cnn import Net  # Import your model
+import torch
+import os
+
+def load_model():
+    """Load the saved model instead of importing from notebook"""
+    model_path = 'models/mnist_best.pth'  # or whatever path you save your model to
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"Model file {model_path} not found. Please ensure the model is saved from the notebook first.")
+    model = torch.load(model_path)
+    model.eval()
+    return model
 
 class ModelChecker:
     def __init__(self, model):
@@ -60,6 +70,6 @@ class ModelChecker:
         assert all(self.checks.values()), "Not all architecture requirements were met!"
                 
 if __name__ == "__main__":
-    model = Net()
+    model = load_model()
     checker = ModelChecker(model)
     checker.run_all_checks() 
