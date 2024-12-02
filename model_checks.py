@@ -78,7 +78,7 @@ def load_model():
     model_path = 'models/mnist_best.pth'
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"Model file {model_path} not found. Please ensure the model is saved from the notebook first.")
-    model = torch.load(model_path)
+    model = torch.load(model_path, map_location=torch.device('cpu'))
     model.eval()
     return model
 
