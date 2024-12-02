@@ -35,4 +35,3 @@ jobs:
         
       - name: Check Model Architecture
         run: python model_checks.py
-</rewritten_file> 
